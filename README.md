@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 
-**The Auction House** is a full-stack e-commerce bidding platform that enables real-time auctions with secure user participation. Built with a robust **Spring Boot** backend and a responsive **Angular** frontend, it features high-concurrency bidding logic, JWT-secured transactions, and automated notification systems.
+**The Auction House** is a full-stack bidding platform that enables real-time auctions with secure user participation. Built with a robust **Spring Boot** backend and a responsive **Angular** frontend, it features high-concurrency bidding logic, JWT-secured transactions, and automated notification systems.
 
 -----
 
