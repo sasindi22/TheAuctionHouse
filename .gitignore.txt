@@ -1,0 +1,12 @@
+# Angular
+frontend/node_modules
+frontend/dist
+
+# Spring Boot
+backend/target
+*.log
+
+# IDE files
+*.iml
+.idea/
+.vscode/
