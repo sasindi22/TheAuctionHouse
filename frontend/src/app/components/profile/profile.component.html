@@ -1,0 +1,151 @@
+<app-navbar></app-navbar>
+
+<main class="profile-container">
+  <section class="profile-card">
+
+    <div *ngIf="!isEditing" class="view-panel">
+      <div class="profile-image-col">
+        <div class="avatar-frame">
+          <img [src]="user.profileImage || 'assets/user.png'" alt="User Avatar">
+        </div>
+      </div>
+
+      <div class="profile-details-col">
+        <h1 class="display-name">{{ user.name || 'Anonymous User' }}</h1>
+        <p class="display-email">{{ user.email || 'example@gmail.com'}}</p>
+        <p class="display-bio">
+          {{ user.bio || 'This user hasn’t shared a bio yet, but they are a valued member of our auction community.' }}
+        </p>
+        <button class="btn-edit-trigger" (click)="isEditing = true">Edit Profile</button>
+      </div>
+    </div>
+
+    <div *ngIf="isEditing" class="edit-panel">
+      <div class="edit-grid-container">
+
+        <div class="edit-left-col">
+          <div class="avatar-frame-wrapper">
+            <div class="avatar-frame">
+              <img [src]="user.profileImage || 'assets/user.png'" alt="User Avatar">
+              <button class="floating-edit-btn" title="Change Photo" (click)="fileInput.click()">
+                <i class="fas fa-camera"></i>
+              </button>
+              <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none">
+            </div>
+          </div>
+          <div class="meta-info-centered">
+            <p class="small-meta">Joined: {{ user.createdAt | date:'shortDate' }}</p>
+            <p class="small-meta">Reliability: {{ user.strikes }}/3 Strikes</p>
+          </div>
+        </div>
+
+        <div class="edit-right-col">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" [(ngModel)]="user.name">
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" [value]="user.email" disabled class="disabled-input">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Mobile Number</label>
+              <input type="text" [(ngModel)]="user.mobile">
+            </div>
+            <div class="form-group">
+              <label>Address (for delivery)</label>
+              <input type="text" [(ngModel)]="user.address">
+            </div>
+          </div>
+
+          <div class="form-row single">
+            <div class="form-group">
+              <label>Bio</label>
+              <textarea [(ngModel)]="user.bio" rows="4"></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions-row">
+            <button class="btn-change-pw" (click)="onForgotPassword()">Change Password</button>
+            <button class="btn-save-red" (click)="onSave()">Save Changes</button>
+            <button class="btn-cancel-plain" (click)="isEditing = false">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-section">
+    <div class="tab-bar">
+      <button class="tab-btn" [class.active]="activeTab === 'auctions'" (click)="setActiveTab('auctions')">
+        <i class="fas fa-gavel"></i> My Auctions
+      </button>
+      <button class="tab-btn" [class.active]="activeTab === 'bids'" (click)="setActiveTab('bids')">
+        <i class="fas fa-hand-paper"></i> My Bids
+      </button>
+      <button class="tab-btn" [class.active]="activeTab === 'won'" (click)="setActiveTab('won')">
+        <i class="fas fa-trophy"></i> My Wins
+      </button>
+    </div>
+
+    <div class="tab-content">
+      <div class="auction-list">
+        <div class="auction-card shadow-hover" *ngFor="let item of displayList">
+
+          <div class="auction-img-col">
+            <img [src]="(item.auction?.image1 || item.image1) || 'assets/user.png'" alt="Thumbnail">
+          </div>
+
+          <div class="auction-title-col">
+            <h3 class="display-title">{{ item.auction?.title || item.title }}</h3>
+          </div>
+
+          <div class="auction-price-col">
+            <span class="price-tag-big">$ {{ (item.amount || item.currentHighBid) | number }}</span>
+          </div>
+
+          <div class="auction-status-col">
+            <span class="flag-badge" [attr.data-status]="item.orderStatus || item.status">
+              {{ item.orderStatus || item.status }}
+            </span>
+          </div>
+          <div class="auction-actions-col">
+            <ng-container *ngIf="activeTab === 'auctions'">
+              <button *ngIf="item.orderStatus === 'PAID'" class="btn-primary" (click)="shipItem(item.id)">Ship</button>
+              <button *ngIf="item.status === 'UNCLAIMED'" class="btn-primary"
+                (click)="onRelist(item.id)">Relist</button>
+              <button class="btn-secondary" [routerLink]="['/auction', item.id]">View Details</button>
+            </ng-container>
+
+            <ng-container *ngIf="activeTab === 'bids'">
+              <button class="btn-secondary" [routerLink]="['/auction', item.id]">View Details</button>
+            </ng-container>
+
+            <ng-container *ngIf="activeTab === 'won'">
+              <button *ngIf="item.status === 'PENDING_PAYMENT'" class="btn-primary btn-save-red"
+                (click)="onClaim(item); $event.stopPropagation()">
+                Claim Item
+              </button>
+              <button *ngIf="item.status === 'PAID'" class="btn-primary" disabled>
+                Claimed
+              </button>
+              <button *ngIf="item.status === 'SHIPPED'" class="btn-primary" (click)="confirmDelivery(item.id)">
+                Confirm Delivery
+              </button>
+              <button class="btn-secondary" [routerLink]="['/auction', item.auction?.id]">
+                View Details
+              </button>
+
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>

@@ -1,0 +1,15 @@
+:root {
+  --primary-burgundy: #5c0a1a;
+  --accent-gold: #d4af37;
+  --gold-hover: #b8962e;
+  --text-white: #ffffff;
+  --bg-light: #f9f9f9;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg-light);
+}

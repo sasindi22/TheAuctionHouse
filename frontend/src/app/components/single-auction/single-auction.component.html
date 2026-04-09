@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+
+<main class="auction-container" *ngIf="item">
+  <div class="visuals-section">
+    <a routerLink="/dashboard" class="back-link">
+      <i class="fas fa-chevron-left"></i> back to auctions
+    </a>
+
+    <div class="gallery-container">
+      <div class="main-square-viewport">
+        <img [src]="mainImage" [alt]="item.title">
+      </div>
+
+      <div class="thumbnail-row">
+        <div class="thumb-square" *ngFor="let img of [item.image1, item.image2, item.image3]"
+          [class.active]="mainImage === img" (click)="setMainImage(img)">
+          <img [src]="img" alt="Thumbnail">
+        </div>
+      </div>
+    </div>
+
+    <article class="details-content">
+      <span class="category-tag">{{ item.category | uppercase }}</span>
+      <h1 class="playfair-title">{{ item.title }}</h1>
+
+      <div class="description-text">
+        <p>{{ item.description }}</p>
+      </div>
+
+      <div class="divider-container">
+        <div class="gold-gradient-line"></div>
+      </div>
+
+      <div class="seller-line">
+        <i class="fas fa-user-circle"></i>
+        <span class="grey-text">auctioned by</span>
+        <span class="black-text">{{ item.sellerName || 'Verified Seller' }}</span>
+      </div>
+    </article>
+  </div>
+
+  <aside class="sidebar-section">
+    <div class="action-card">
+      <div class="bid-header-row">
+        <div class="bid-focus">
+          <span class="small-label">Current Highest Bid</span>
+          <h2 class="current-price-yellow">{{ item.currentHighBid | currency }}</h2>
+        </div>
+        <button class="btn-watchlist" (click)="onToggleWatchlist($event, item.id)" [class.saved]="isSaved(item.id)">
+          <i [class]="isSaved(item.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
+        </button>
+      </div>
+
+      <div class="info-boxes-grid">
+        <div class="info-box-grey">
+          <span class="box-label">Minimum Bid</span>
+          <span class="box-value">{{ (item.currentHighBid * 1.05) | currency }}</span>
+        </div>
+        <div class="info-box-grey">
+          <span class="box-label">Time Left</span>
+          <span class="box-value timer-text">{{ timeLeft }}</span>
+        </div>
+      </div>
+
+      <div class="bid-interaction-area">
+        <div class="input-inline-group">
+          <div class="input-container">
+            <span class="currency-prefix"></span>
+            <input type="number" [(ngModel)]="bidAmount" placeholder="amount">
+          </div>
+          <button class="btn-place-bid-yellow" (click)="onPlaceBid()">Place Bid</button>
+        </div>
+        <p class="bid-count-subtext">{{ bidCount }} bids placed so far</p>
+      </div>
+    </div>
+
+    <div class="history-card">
+      <h3 class="history-title">Bid History</h3>
+      <div class="history-list">
+        <div class="history-item" *ngFor="let bid of sortedBids; let i = index" [class.top-bid]="i === 0">
+          <div class="bidder-info">
+            <span class="rank-circle">{{ sortedBids.length - i }}</span>
+            <div class="bidder-meta">
+              <span class="bidder-name">{{ bid.bidderName || 'Private Buyer' }}</span>
+              <span class="bid-date">{{ bid.bidTime | date:'MM/dd/yyyy' }}</span>
+            </div>
+          </div>
+          <span class="bid-amount">{{ bid.amount | currency }}</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+</main>

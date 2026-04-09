@@ -1,0 +1,54 @@
+<div class="split-screen">
+  <div class="left-pane">
+    <div class="brand-content">
+      <h1 class="logo-text">The Auction House</h1>
+      <hr class="gold-divider">
+      <p class="tagline">Where extraordinary meets exclusivity.</p>
+      <p class="tagline">Discover rare treasures from around the world.</p>
+    </div>
+  </div>
+
+  <div class="right-pane">
+    <div class="form-container">
+      <h2>Create Account</h2>
+      <p class="form-subtitle">Join the most exclusive auction platform</p>
+
+      <form class="register-form" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" name="fullName" [(ngModel)]="registerData.name" placeholder="Alexander Sterling">
+        </div>
+
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" name="email" [(ngModel)]="registerData.email" placeholder="you@example.com">
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <div class="password-wrapper">
+            <input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="registerData.password"
+              placeholder="••••••••">
+            <i class="far" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePassword()"></i>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Confirm Password</label>
+          <div class="password-wrapper">
+            <input [type]="showConfirmPassword ? 'text' : 'password'" name="confirmPassword"
+              [(ngModel)]="registerData.confirmPassword" placeholder="••••••••">
+            <i class="far" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
+              (click)="toggleConfirmPassword()"></i>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-register">Create Account</button>
+      </form>
+
+      <p class="login-redirect">
+        Already have an account? <a routerLink="/login">Sign In</a>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+<div class="notifications-container">
+    <div class="notifications-header">
+        <div class="title-section">
+            <h1 class="display-title">Notifications</h1>
+            <p class="subtitle">Stay updated on your auction activity</p>
+        </div>
+    </div>
+
+    <div class="filter-tabs">
+        <button class="tab-btn" [class.active]="activeFilter === 'ALL'" (click)="setActiveFilter('ALL')">
+            All
+        </button>
+        <button class="tab-btn" [class.active]="activeFilter === 'WINS'" (click)="setActiveFilter('WINS')">
+            Wins
+        </button>
+        <button class="tab-btn" [class.active]="activeFilter === 'ITEMS'" (click)="setActiveFilter('ITEMS')">
+            My Items
+        </button>
+    </div>
+
+    <div class="mark-read-row">
+        <button class="btn-text" (click)="markAllAsRead()">mark as read</button>
+    </div>
+
+    <div class="notification-list">
+        <div *ngFor="let notification of filteredNotifications" class="notification-card"
+            [class.unread]="!notification.read" [attr.data-type]="notification.type">
+            <div class="card-left">
+                <div class="icon-circle">
+                    <i [class]="getNotificationIcon(notification.type)"></i>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <h3 class="notification-title">{{ notification.title }}</h3>
+                <p class="notification-message">{{ notification.message }}</p>
+                <div class="notification-actions" *ngIf="notification.type === 'UNCLAIMED' || notification.type === 'EXPIRED'">
+                    <button class="btn-relist" (click)="relist(notification.auctionId, notification.id)">
+                        Relist Now
+                    </button>
+                    <button class="btn-delete" (click)="dismissNotification(notification.id)">
+                        Dismiss
+                    </button>
+                </div>
+                <span class="notification-timestamp">
+                    {{ notification.timestamp | date:'dd/MM/yyyy, HH:mm:ss' }}
+                </span>
+            </div>
+
+            <div class="card-actions">
+                <button class="btn-icon dismiss-btn" title="Dismiss" (click)="dismissNotification(notification.id)">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div *ngIf="!notification.read" class="unread-dot" title="Unread"></div>
+            </div>
+        </div>
+    </div>
+</div>

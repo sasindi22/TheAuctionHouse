@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+
+<main class="saved-items-container">
+    <header class="page-header">
+        <h1 class="playfair-title">My Saved Items</h1>
+        <p class="subtitle">Track and manage the auctions you've bookmarked for later.</p>
+    </header>
+
+    <section class="activity-section">
+        <div class="tab-content">
+            <div class="auction-list">
+
+                <div class="auction-card shadow-hover" *ngFor="let item of savedItems">
+                    <div class="auction-img">
+                        <img [src]="item.image1 || 'https://via.placeholder.com/150'" alt="Auction Item">
+                        <span class="status-badge" [ngClass]="item.status.toLowerCase()">
+                            {{ item.status }}
+                        </span>
+                    </div>
+
+                    <div class="auction-info">
+                        <div class="info-header">
+                            <h3>{{ item.title }}</h3>
+                            <span class="price-tag">${{ item.currentHighBid | number:'1.2-2' }}</span>
+                        </div>
+
+                        <div class="description-area">
+                            <p class="description" *ngIf="item.status === 'ONGOING'">
+                                Ends: <span class="timer">{{ item.endTime | date:'medium' }}</span>
+                            </p>
+                            <p class="description" *ngIf="item.status !== 'ONGOING'">
+                                Status: <strong>{{ item.status }}</strong>
+                            </p>
+                        </div>
+
+                        <div class="info-footer">
+                            <span class="bid-count">
+                                <i class="fas fa-tag"></i> {{ item.category }}
+                            </span>
+
+                            <div class="action-group">
+                                <button class="btn-unsave" (click)="onUnsave(item.id)">
+                                    <i class="fas fa-heart-broken"></i> Unsave
+                                </button>
+                                <button class="btn-view" [routerLink]="['/auction', item.id]">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="empty-state" *ngIf="savedItems.length === 0">
+                    <div class="empty-icon-wrapper">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <p>Your saved list is empty.</p>
+                    <button class="btn-view" routerLink="/dashboard" style="margin-top: 15px;">Explore Auctions</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>

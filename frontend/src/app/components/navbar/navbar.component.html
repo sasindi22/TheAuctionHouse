@@ -1,0 +1,43 @@
+<header class="dashboard-navbar">
+  <div class="nav-brand">
+    <i class="fas fa-gavel gold-icon"></i>
+    <span class="logo-text">The Auction House</span>
+  </div>
+
+  <button class="menu-toggle" (click)="toggleMenu()">
+    <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+  </button>
+
+  <nav class="nav-links" [class.mobile-open]="isMenuOpen">
+    <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" (click)="isMenuOpen = false">
+      <i class="fas fa-home"></i> <span class="nav-text">Dashboard</span>
+    </a>
+    <a routerLink="/saved-items" routerLinkActive="active" class="nav-item" (click)="isMenuOpen = false">
+      <i class="far fa-heart"></i> <span class="nav-text">Saved</span>
+    </a>
+    <a routerLink="/add-auction" routerLinkActive="active" class="nav-item" (click)="isMenuOpen = false">
+      <i class="fas fa-plus"></i> <span class="nav-text">Add Auction</span>
+    </a>
+    <a routerLink="/profile" routerLinkActive="active" class="nav-item" (click)="isMenuOpen = false">
+      <i class="far fa-user"></i> <span class="nav-text">Profile</span>
+    </a>
+    
+<div class="nav-item notification-row">
+  <div class="nav-link-content" routerLink="/notifications">
+    <i class="far fa-bell"></i>
+    <span class="nav-text">Notifications</span>
+  </div>
+  <span class="badge">2</span>
+</div>
+
+    <button *ngIf="!isLoggedIn" class="btn-auth btn-login" routerLink="/login">
+  <i class="fas fa-sign-in-alt"></i> &nbsp;
+  <span class="nav-text">Login</span>
+</button>
+
+<button *ngIf="isLoggedIn" class="btn-auth btn-logout" (click)="onLogout()">
+  <i class="fas fa-sign-out-alt"></i> &nbsp;
+  <span class="nav-text">Logout</span>
+</button>
+  </nav>
+</header>

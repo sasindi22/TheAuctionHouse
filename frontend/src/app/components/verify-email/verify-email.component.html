@@ -1,0 +1,36 @@
+<div class="split-screen">
+  <div class="left-pane">
+    <div class="brand-content">
+      <h1 class="logo-text">The Auction House</h1>
+      <hr class="gold-divider">
+      <p class="tagline">Where extraordinary meets exclusivity.</p>
+      <p class="sub-tagline">Discover rare treasures from around the world.</p>
+    </div>
+  </div>
+
+  <div class="right-pane">
+    <div class="verify-container">
+      <h2>Verify Your Email</h2>
+      <p class="subtitle">We've sent a 6-digit code to your email address</p>
+
+      <div class="icon-header">
+        <div class="envelope-circle">
+          <i class="fas fa-envelope-open-text"></i>
+        </div>
+      </div>
+
+      <div class="otp-inputs">
+        <input *ngFor="let digit of [0,1,2,3,4,5]; let i = index" #otpInput type="text" maxlength="1" class="otp-field"
+          placeholder="·" (input)="handleInput($event, i, otpInput)" (keydown)="handleKeyDown($event, i, otpInput)">
+      </div>
+
+      <button class="btn-verify" (click)="verifyCode()">Verify Email</button>
+
+      <p class="resend-text">
+        Didn't receive the code?
+        <button type="button" class="btn-resend" (click)="resendOtp()">Resend</button>
+      </p>
+
+    </div>
+  </div>
+</div>

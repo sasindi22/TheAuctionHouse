@@ -1,0 +1,42 @@
+<div class="split-screen">
+    <div class="left-pane">
+        <div class="brand-content">
+            <h1 class="logo-text">The Auction House</h1>
+            <hr class="gold-divider">
+            <p class="tagline">Where extraordinary meets exclusivity.</p>
+            <p class="tagline">Discover rare treasures from around the world.</p>
+        </div>
+    </div>
+
+    <div class="right-pane">
+        <div class="form-container">
+            <h2>Welcome Back</h2>
+            <p class="form-subtitle">Sign in to your exclusive account</p>
+
+            <form class="login-form" (ngSubmit)="onLogin()">
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" name="email" [(ngModel)]="loginData.email" placeholder="you@example.com"
+                        required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="password-wrapper">
+                        <input [type]="showPassword ? 'text' : 'password'" name="password"
+                            [(ngModel)]="loginData.password" placeholder="••••••••" required>
+                        <i class="far" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+                            (click)="togglePassword()"></i>
+                    </div>
+                    <a routerLink="/forgot-password" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-login">Sign In</button>
+            </form>
+
+            <p class="register-redirect">
+                Don't have an account? <a routerLink="/register">Create Account</a>
+            </p>
+        </div>
+    </div>
+</div>

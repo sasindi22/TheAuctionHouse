@@ -1,0 +1,298 @@
+:host {
+  display: block;
+  background: #fdfdfd;
+  font-family: "Playfair Display", serif;
+}
+
+.notifications-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.notifications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.display-title {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin: 0;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 5px 0 0 0;
+  font-family: sans-serif;
+}
+
+.filters-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.mark-read-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: #5c0a1a;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+  font-family: sans-serif;
+  margin-top: 15px;
+}
+
+.btn-text:hover {
+  text-decoration: underline;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tab-btn {
+  background: white;
+  border: 1px solid #ddd;
+  color: #333;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.tab-btn:hover {
+  background: #f9f9f9;
+}
+
+.tab-btn.active {
+  background: #5c0a1a;
+  color: white;
+  border-color: #5c0a1a;
+}
+
+.notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-family: sans-serif;
+}
+
+.notification-card {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 15px;
+  min-height: 100px;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.notification-card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transform: translateX(4px);
+}
+
+.notification-card.unread {
+  background: #fffcf2;
+}
+
+.border-highlight {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  border-radius: 5px 0 0 5px;
+}
+
+.card-left {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5c0a1a;
+  font-size: 1.2rem;
+  background: white;
+  margin-right: 15px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.notification-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.notification-message {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.notification-timestamp {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 5px;
+}
+
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding-left: 10px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.dismiss-btn {
+  color: #999;
+  transition: all 0.2s;
+}
+
+.dismiss-btn:hover {
+  color: #e74c3c;
+  background: #fdedec;
+}
+
+.unread-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #f39c12;
+  border-radius: 50%;
+  margin-top: 15px;
+}
+
+.notification-card[data-type="OUTBID"] .border-highlight {
+  background-color: #f39c12;
+}
+
+.notification-card[data-type="WON"] .border-highlight {
+  background-color: #2ecc71;
+}
+
+.notification-card[data-type="ENDING_SOON"] .border-highlight {
+  background-color: #f39c12;
+}
+
+.notification-card[data-type="NEW_BID"] .border-highlight {
+  background-color: #5c0a1a;
+}
+
+@media (max-width: 768px) {
+  .notifications-container {
+    margin: 20px auto;
+  }
+
+  .notifications-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-tabs {
+    flex-wrap: wrap;
+  }
+
+  .mark-read-row {
+    margin-top: 10px;
+  }
+
+  .display-title {
+    font-size: 2rem;
+  }
+
+  .btn-text {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
+
+  .notification-card {
+    grid-template-columns: 1fr;
+    padding: 15px;
+    min-height: auto;
+    gap: 10px;
+  }
+
+  .card-left {
+    display: none;
+  }
+
+  .border-highlight {
+    width: 3px;
+  }
+
+  .notification-title {
+    font-size: 0.95rem;
+  }
+
+  .notification-message {
+    font-size: 0.85rem;
+  }
+
+  .card-actions {
+    flex-direction: row;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: auto;
+    padding: 0;
+    gap: 8px;
+  }
+
+  .unread-dot {
+    margin-top: 0;
+    position: static;
+  }
+}

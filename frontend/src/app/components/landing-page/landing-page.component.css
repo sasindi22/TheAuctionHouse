@@ -1,0 +1,240 @@
+.landing-container {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.hero {
+  background-color: var(--primary-burgundy);
+  min-height: 100vh;
+  width: 100vw;
+  color: var(--text-white);
+  padding: 20px 8%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 30px 30px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  white-space: nowrap;
+}
+
+.gold-icon {
+  color: var(--accent-gold);
+  margin-right: 10px;
+}
+
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.btn-link,
+.btn-gold,
+.btn-gold-fill,
+.btn-outline {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-sans);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: 500;
+}
+
+.btn-link:hover {
+  color: var(--accent-gold);
+}
+
+.btn-gold {
+  background: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  color: var(--primary-burgundy);
+}
+
+.btn-gold:hover,
+.btn-gold-fill:hover {
+  background-color: var(--gold-hover);
+  border-color: var(--gold-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.hero-content h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1.1;
+  margin: 30px 0;
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin-bottom: 40px;
+  padding: 0 15px;
+}
+
+.gold-divider {
+  width: 180px;
+  height: 2px;
+  border: none;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--accent-gold),
+    transparent
+  );
+  margin: 15px 0;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 25px;
+  margin-top: 10px;
+}
+
+.btn-gold-fill {
+  background: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+  color: var(--primary-burgundy);
+  padding: 16px 36px;
+  font-weight: 700;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  padding: 16px 36px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--text-white);
+  transform: translateY(-3px);
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 60px;
+  padding: 120px 10%;
+  background: #ffffff;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 40px 30px;
+  background: #fff;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  border: 1px solid transparent;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.icon-circle {
+  color: var(--primary-burgundy);
+  font-size: 2.8rem;
+  margin-bottom: 25px;
+}
+
+.feature-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: #1a1a1a;
+}
+
+.feature-card p {
+  color: #555;
+  line-height: 1.7;
+}
+
+.footer {
+  background: #ffffff;
+  text-align: center;
+  padding: 60px 20px;
+  border-top: 1px solid #f0f0f0;
+  color: #888;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 25px;
+    padding: 30px 0;
+  }
+
+  .nav-auth {
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .btn-gold-fill,
+  .btn-outline {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .hero {
+    padding: 20px 5%;
+  }
+}

@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+
+<div class="add-auction-container">
+    <div class="header-section">
+        <h1>Create Auction</h1>
+        <p>List your extraordinary item for auction</p>
+    </div>
+
+    <form class="auction-form" (ngSubmit)="onSubmit()">
+        <div class="form-section">
+            <div class="image-header">
+                <label>Images (3 Required)</label>
+                <span class="clarity-msg">To have more clarity over the item, add three clear images.</span>
+            </div>
+            <div class="image-upload-grid">
+                <div class="upload-box" [class.has-image]="auctionData.image1">
+                    @if (auctionData.image1) {
+                    <img [src]="auctionData.image1" class="preview-img">
+                    <span class="change-overlay">Change Image 1</span>
+                    } @else {
+                    <i class="fas fa-camera"></i>
+                    <span>Add Image 1</span>
+                    }
+                    <input type="file" class="file-input" (change)="onFileSelected($event, 1)" accept="image/*">
+                </div>
+
+                <div class="upload-box" [class.has-image]="auctionData.image2">
+                    @if (auctionData.image2) {
+                    <img [src]="auctionData.image2" class="preview-img">
+                    <span class="change-overlay">Change Image 2</span>
+                    } @else {
+                    <i class="fas fa-camera"></i>
+                    <span>Add Image 2</span>
+                    }
+                    <input type="file" class="file-input" (change)="onFileSelected($event, 2)" accept="image/*">
+                </div>
+
+                <div class="upload-box" [class.has-image]="auctionData.image3">
+                    @if (auctionData.image3) {
+                    <img [src]="auctionData.image3" class="preview-img">
+                    <span class="change-overlay">Change Image 3</span>
+                    } @else {
+                    <i class="fas fa-camera"></i>
+                    <span>Add Image 3</span>
+                    }
+                    <input type="file" class="file-input" (change)="onFileSelected($event, 3)" accept="image/*">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label>Title</label>
+                <input type="text" name="title" [(ngModel)]="auctionData.title" required
+                    placeholder="e.g., Antique Emerald Brooch">
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <select name="category" [(ngModel)]="auctionData.category" required>
+                    <option value="">Select category</option>
+                    <option *ngFor="let cat of categories" [value]="cat">
+                        {{ cat }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Minimum Price ($)</label>
+                <input type="number" name="minPrice" [(ngModel)]="auctionData.minimumPrice" required
+                    placeholder="10,000">
+            </div>
+
+            <div class="form-group full-width">
+                <label>Description</label>
+                <textarea name="description" [(ngModel)]="auctionData.description" rows="4"
+                    placeholder="Describe the item's history..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Expiry Date</label>
+                <input type="datetime-local" name="endTime" [(ngModel)]="auctionData.endTime" required>
+            </div>
+
+            <div class="form-group">
+                <label>Shipping Option</label>
+                <select name="shipping" [(ngModel)]="auctionData.shippingOption">
+                    <option value="Standard">Standard</option>
+                    <option value="Express">Express</option>
+                    <option value="Fragile/Insured">Fragile/Insured</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn-cancel" routerLink="/dashboard">Cancel</button>
+            <button type="submit" class="btn-publish">Publish Auction</button>
+        </div>
+    </form>
+</div>

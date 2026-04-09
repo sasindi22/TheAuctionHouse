@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+
+<main class="dashboard-container">
+  <header class="content-header">
+    <h1 class="main-title">Discover Auctions</h1>
+    <p class="subtitle">Browse our curated collection of extraordinary items</p>
+  </header>
+
+  <div class="search-section-wrapper">
+    <section class="search-filter-section">
+      <div class="search-bar">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" placeholder="Search auctions..." class="search-input" [(ngModel)]="searchKeyword"
+          (input)="onSearch()">
+      </div>
+      <button class="filter-btn" [class.active]="showFilters" (click)="toggleFilters()">
+        <i class="fas fa-sliders-h"></i> Filters
+      </button>
+    </section>
+
+    <div class="filter-drawer" [class.open]="showFilters">
+      <div class="filter-content">
+
+        <div class="filter-group price-section">
+          <label>Price Range</label>
+          <div class="price-input-wrapper">
+            <div class="price-field-group">
+              <div class="price-box">
+                <span class="currency-prefix">$</span>
+                <input type="number" [(ngModel)]="minPrice" placeholder="Min">
+              </div>
+              <div class="price-divider">to</div>
+              <div class="price-box">
+                <span class="currency-prefix">$</span>
+                <input type="number" [(ngModel)]="maxPrice" placeholder="Max">
+              </div>
+            </div>
+            <button class="price-btn" (click)="applyPriceFilter()">
+              Apply
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-group sort-section">
+          <label>Sort By</label>
+          <div class="select-wrapper">
+            <select class="filter-select" [(ngModel)]="selectedSort" (change)="applySort()">
+              <option value="lowest" selected>Lowest - Highest</option>
+              <option value="highest">Highest - Lowest</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <nav class="category-pills">
+    <button *ngFor="let cat of categories" class="pill-btn" [class.active]="selectedCategory === cat"
+      (click)="selectCategory(cat)">
+      {{ cat }}
+    </button>
+  </nav>
+
+  <div class="auction-grid">
+    <div class="auction-card" *ngFor="let item of auctionItems" (click)="goToAuction(item.id)">
+      <div class="card-media">
+        <img [src]="item.imageUrl" [alt]="item.title" class="auction-image">
+
+        <div class="time-overlay">
+          <i class="far fa-clock"></i> {{ item.timeLeft }}
+        </div>
+
+        <button class="wishlist-btn" (click)="onToggleWatchlist($event, item.id)" [class.saved]="isSaved(item.id)">
+          <i [class]="isSaved(item.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
+        </button>
+      </div>
+
+      <div class="card-info">
+        <div class="card-row">
+
+          <div class="info-left">
+            <span class="category-tag">{{ item.category }}</span>
+            <h3 class="item-title">{{ item.title }}</h3>
+          </div>
+
+          <div class="info-right">
+            <span class="bid-label">Current High Bid</span>
+            <span class="bid-amount">
+              {{ item.currentBid | currency:'USD':'symbol':'1.0-0' }}
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
